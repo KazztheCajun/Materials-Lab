@@ -27,36 +27,12 @@ public class Crucible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(this.temperature >= this.threshold)
-        {
-            // foreach(GameObject g in contents)
-            // {
-            //     g.SetActive(false);
-            // }
-            this.fill.materials[1] = fullMat;
-        }
+        
     }
 
     public void HeatContents()
     {
-        this.temperature += fillSpeed * Time.deltaTime;
+        // Heat up each meltable object inside the crucible
     }
 
-    //  void OnTriggerEnter(Collider other)
-    // {
-    //     if(other.gameObject.tag == "ore")
-    //     {
-    //         contents.Add(other.gameObject); // add it to the list of crucibles on the fire
-    //         Debug.Log($"{other.gameObject} was placed in the crucible.");
-    //     }
-    // }
-
-    // void OnTriggerExit(Collider other)
-    // {
-    //     if(other.gameObject.tag == "ore")
-    //     {
-    //         contents.Remove(other.gameObject);
-    //         Debug.Log($"{other.gameObject} was removed from the crucible.");
-    //     }
-    // }
 }
