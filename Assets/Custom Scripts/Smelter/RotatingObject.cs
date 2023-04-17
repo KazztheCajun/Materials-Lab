@@ -28,27 +28,28 @@ public class RotatingObject : MonoBehaviour
 
     void RotateObject(Vector3 rotation) // rotate the object by a given rotational vector
     {
+        //Debug.Log(rotation);
         transform.Rotate(rotation);
     }
 
     Vector3 GenerateRotation() // generate between 1-3 rotations for this object along selected rotational axis'
     {
-        Vector3 r = new Vector3();
-        GetAxisOfRotation(first, r);
+        Vector3 r = new Vector3(); // a Vector3 is a struct so it must be explicitly passed by reference
+        GetAxisOfRotation(first, ref r);
         if(hasSecondRotation)
         {
-            GetAxisOfRotation(second, r);
+            GetAxisOfRotation(second, ref r);
         }
 
         if(hasThirdRotation)
         {
-            GetAxisOfRotation(third, r);
+            GetAxisOfRotation(third, ref r);
         }
 
         return r;
     }
 
-    void GetAxisOfRotation(RotationAxis a, Vector3 r) // incriment the given axis of the given vector by the speed of the object
+    void GetAxisOfRotation(RotationAxis a, ref Vector3 r) // incriment the given axis of the given vector by the speed of the object
     {
         switch (a)
         {

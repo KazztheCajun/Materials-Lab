@@ -19,12 +19,20 @@ public class HeatArea : MonoBehaviour
 
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other) // while a cruciable is in a heating zone
     {
         if(other.gameObject.tag == "crucible")
         {
             //Debug.Log($"{other.gameObject} was heated up by {this}.");
-            other.GetComponent<Crucible>().HeatContents();
+            other.GetComponent<Crucible>().isBeingHeated = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "crucible")
+        {
+            other.GetComponent<Crucible>().isBeingHeated = false;
         }
     }
 

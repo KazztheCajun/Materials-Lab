@@ -19,7 +19,7 @@ public class PourMetal : MonoBehaviour
 
     private void Update()
     {
-        if(pot.temperature >= pot.threshold) // only pour if the metal is higher than a threshold | should get from the material in the crucible
+        if(pot.pourable) // only pour if the metal is higher than a threshold | should get from the material in the crucible
         {
             bool pourCheck = CalculatePourAngle() < pourThreshold;
 

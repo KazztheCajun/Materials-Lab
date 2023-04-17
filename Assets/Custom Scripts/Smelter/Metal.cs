@@ -5,8 +5,8 @@ using UnityEngine;
 public class Metal : MonoBehaviour
 {
     string n; // metal name
-    float c; // $/lb
-    float d; // lb/ft^3
+    float c; // $/kg
+    float d; // kg/m^3
     int h; // Rockwell
     float t; // tensile strength | ksi (Kilopound per square inch)
     float m; // melting point | F
