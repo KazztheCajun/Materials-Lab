@@ -51,7 +51,8 @@ GameObject:
   - component: {fileID: 173585125174789469}
   - component: {fileID: 3287791408435133425}
   - component: {fileID: 4654628510998537159}
-  - component: {fileID: 1230837353984325586}
+  - component: {fileID: 5619306010159739637}
+  - component: {fileID: 53476245510801987}
   m_Layer: 0
   m_Name: IndustrialCrucible
   m_TagString: crucible
@@ -66,7 +67,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3838759720247537786}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.02672261, y: 2.442, z: 0.055530548}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
@@ -104,8 +105,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9607862bf90553342b6c7a1e3d273805, type: 2}
-  - {fileID: 2100000, guid: 7112bb349947f524aabed82ba2bc2b7f, type: 2}
+  - {fileID: 2100000, guid: d74ccebdf90e02c45a7677d9a3c3e2a2, type: 2}
+  - {fileID: 2100000, guid: b25890b4c33b8de4d901065c82505879, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -350,8 +351,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pourThreshold: 45
   waterParticleSystem: {fileID: 6934343830068780866}
-  pot: {fileID: 1230837353984325586}
---- !u!114 &1230837353984325586
+  pot: {fileID: 53476245510801987}
+--- !u!114 &5619306010159739637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3838759720247537786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019f41377cf64284eb15f7b80237402c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metal: {fileID: 0}
+  temperature: 40
+  heatSpeed: 101
+  coolSpeed: 0.1
+  isMelting: 0
+--- !u!114 &53476245510801987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,9 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf72e9a8be485c24bbda20f62dc3b9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTemp: 4000
+  roomTemp: {fileID: 2100000, guid: d74ccebdf90e02c45a7677d9a3c3e2a2, type: 2}
+  redHot: {fileID: 2100000, guid: 10db8ce61ed43e7418a9ec2ee587ed48, type: 2}
   items: []
-  pourable: 0
-  isBeingHeated: 0
 --- !u!1 &5110751275340440857
 GameObject:
   m_ObjectHideFlags: 0
@@ -5127,7 +5146,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 406f8419e80a3974cb34cce8ac1afdcf, type: 2}
+  - {fileID: 2100000, guid: b25890b4c33b8de4d901065c82505879, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

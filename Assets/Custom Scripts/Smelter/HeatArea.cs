@@ -24,7 +24,7 @@ public class HeatArea : MonoBehaviour
         if(other.gameObject.tag == "crucible")
         {
             //Debug.Log($"{other.gameObject} was heated up by {this}.");
-            other.GetComponent<Crucible>().isBeingHeated = true;
+            other.GetComponent<Crucible>().IsBeingHeated = true;
         }
     }
 
@@ -32,7 +32,7 @@ public class HeatArea : MonoBehaviour
     {
         if(other.gameObject.tag == "crucible")
         {
-            other.GetComponent<Crucible>().isBeingHeated = false;
+            other.GetComponent<Crucible>().IsBeingHeated = false;
         }
     }
 

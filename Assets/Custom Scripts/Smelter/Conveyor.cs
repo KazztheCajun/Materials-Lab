@@ -6,10 +6,10 @@ public class Conveyor : MonoBehaviour
 {
     [Range(0, 200f)]
     public float speed;
-    public GameObject item;
-    public GameObject start;
-    public GameObject middle;
-    public GameObject end;
+    public Transform item;
+    public Transform start;
+    public Transform middle;
+    public Transform end;
 
     private Transform current;
     private bool isEngaged;
@@ -17,8 +17,8 @@ public class Conveyor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        current = start.transform;
-        item.transform.position = current.transform.position;
+        current = middle;
+        item.position = start.position;
         isEngaged = false;
     }
 
@@ -33,13 +33,23 @@ public class Conveyor : MonoBehaviour
 
     private void MoveItem()
     {
-        if(Vector3.Distance(item.transform.position, current.position) > .1)
+        if(Vector3.Distance(item.position, current.position) > .1)
         {
-            item.transform.position = Vector3.MoveTowards(item.transform.position, current.position, speed * Time.deltaTime);
+            item.position = Vector3.MoveTowards(item.position, current.position, speed * Time.deltaTime);
         }
         else
         {
-            SignalConveyor(false);
+            if(current == middle)
+            {
+                SignalConveyor(false);
+                current = end;
+            }
+            else
+            {
+                SignalConveyor(false);
+                current = middle;
+                item.position = start.position;
+            }
         }
     }
 
