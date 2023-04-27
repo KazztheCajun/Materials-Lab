@@ -9,9 +9,10 @@ public class ElectroSmelter : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "cruciable")
+        if(other.gameObject.tag == "crucible")
         {
-            Crucible c = other.gameObject.GetComponent<Crucible>(); 
+            Crucible c = other.gameObject.GetComponent<Crucible>();
+            Debug.Log(effects[0].isPlaying);
             if(effects[0].isPlaying) // if the forge is active
             {
                 c.IsBeingHeated = true; // the cruciable is being heated

@@ -16,7 +16,8 @@ public class Crucible : MonoBehaviour
         get {return isBeingHeated;} 
         set {isBeingHeated = value;} 
     }
-    
+    public MeltableObject Thermo => thermo;
+
     private bool pourable; // can the material in the crucible be poured?
     private bool isBeingHeated; // is the crucible currently being heated by something
     private MeltableObject thermo; // thermodynamic information
@@ -30,6 +31,7 @@ public class Crucible : MonoBehaviour
         this.items = new List<MeltableObject>();
         this.render = this.GetComponent<MeshRenderer>();
         this.render.material = new Material(render.material); // clone prefab material so it doesn't affect all crucibles
+        this.isBeingHeated = false;
         this.thermo = this.GetComponent<MeltableObject>();
         //this.contents = new List<GameObject>();
     }
@@ -48,15 +50,19 @@ public class Crucible : MonoBehaviour
 
         UpdateColor();
 
-        pourable = true; // assume it is pourable
-        foreach(MeltableObject o in items)
+        if(items.Count > 0)
         {
-            if(!o.isMelting)
+            pourable = true; // assume it is pourable
+            foreach(MeltableObject o in items)
             {
-                pourable = false; // prove it wrong
-                break; // no need to check the others
+                if(!o.isMelting)
+                {
+                    pourable = false; // prove it wrong
+                    break; // no need to check the others
+                }
             }
         }
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -82,7 +88,7 @@ public class Crucible : MonoBehaviour
         if(thermo.temperature >= 600) // color change threshold
         {
             // When the cruciable is sufficiently hot, Lerp between the roomTemp material and the redHot material, scaled to a % between 0 to maxTemp
-            this.render.material.Lerp(roomTemp, redHot, Mathf.Clamp(thermo.temperature, 0, maxTemp) / maxTemp);
+            this.render.material.Lerp(roomTemp, redHot, Mathf.Clamp(thermo.temperature - 600, 0, maxTemp) / maxTemp);
         }
     }
 
@@ -102,6 +108,7 @@ public class Crucible : MonoBehaviour
     public void CoolContents()
     {
         // cool off each meltable object inside the crucible
+        this.thermo.CoolObject();
         if(items.Count > 0) // if there are items in the list
         {
             foreach(MeltableObject o in items)

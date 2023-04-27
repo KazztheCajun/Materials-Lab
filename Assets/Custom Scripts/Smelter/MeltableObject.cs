@@ -23,7 +23,7 @@ public class MeltableObject : MonoBehaviour, IEquatable<MeltableObject>
     // Update is called once per frame
     void Update()
     {
-        if(temperature >= metal.MeltingPoint)
+        if(metal != null && temperature >= metal.MeltingPoint)
         {
             isMelting = true;
         }
