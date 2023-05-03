@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Metal : MonoBehaviour
+public class Metal
 {
     string n; // metal name
     float c; // $/kg
-    float d; // kg/m^3
+    float d; // g/cm^3
     int h; // Rockwell
     float t; // tensile strength | ksi (Kilopound per square inch)
     float m; // melting point | F

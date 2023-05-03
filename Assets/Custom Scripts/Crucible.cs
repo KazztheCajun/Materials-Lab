@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Crucible : MonoBehaviour
 {
-    public float maxTemp;
-    public Material roomTemp;
-    public Material redHot;
     public List<MeltableObject> items;
-    
-
     public bool Pourable => pourable;
     public bool IsBeingHeated 
     {
@@ -21,7 +16,7 @@ public class Crucible : MonoBehaviour
     private bool pourable; // can the material in the crucible be poured?
     private bool isBeingHeated; // is the crucible currently being heated by something
     private MeltableObject thermo; // thermodynamic information
-    private MeshRenderer render; 
+     
 
 
     // Start is called before the first frame update
@@ -29,8 +24,6 @@ public class Crucible : MonoBehaviour
     {
         this.pourable = false;
         this.items = new List<MeltableObject>();
-        this.render = this.GetComponent<MeshRenderer>();
-        this.render.material = new Material(render.material); // clone prefab material so it doesn't affect all crucibles
         this.isBeingHeated = false;
         this.thermo = this.GetComponent<MeltableObject>();
         //this.contents = new List<GameObject>();
@@ -47,8 +40,6 @@ public class Crucible : MonoBehaviour
         {
             CoolContents();
         }
-
-        UpdateColor();
 
         if(items.Count > 0)
         {
@@ -80,15 +71,6 @@ public class Crucible : MonoBehaviour
         {
             Debug.Log($"Removing {other.gameObject} from the cruciable");
             items.Remove(other.gameObject.GetComponent<MeltableObject>()); // when the Item leaves the trigger, remove it from the item list
-        }
-    }
-
-    private void UpdateColor()
-    {
-        if(thermo.temperature >= 600) // color change threshold
-        {
-            // When the cruciable is sufficiently hot, Lerp between the roomTemp material and the redHot material, scaled to a % between 0 to maxTemp
-            this.render.material.Lerp(roomTemp, redHot, Mathf.Clamp(thermo.temperature - 600, 0, maxTemp) / maxTemp);
         }
     }
 

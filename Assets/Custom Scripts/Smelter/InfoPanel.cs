@@ -42,7 +42,7 @@ public class InfoPanel : MonoBehaviour
             hasChanged = false;
         }
 
-        tempText.text = crucible.Thermo.temperature.ToString("F2") + "° F";
+        tempText.text = crucible.Thermo.temperature.ToString("F2", CultureInfo.CurrentCulture) + "° F";
 
         if(smelter.effects[0].isPlaying)
         {
