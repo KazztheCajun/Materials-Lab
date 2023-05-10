@@ -14,6 +14,7 @@ public class InfoPanel : MonoBehaviour
     public TextMeshProUGUI itemsText;
     public TextMeshProUGUI tempText;
 
+    [SerializeField]
     private List<string> itemList;
     private bool hasChanged;
     // Start is called before the first frame update
@@ -36,10 +37,12 @@ public class InfoPanel : MonoBehaviour
             StringBuilder text = new StringBuilder("");
             foreach(string s in itemList)
             {
-                text.Append(s);
+                text.Append($"{s}\n");
             }
+            itemsText.text = "";
             itemsText.text = text.ToString();
             hasChanged = false;
+            //itemList.Clear();
         }
 
         tempText.text = crucible.Thermo.temperature.ToString("F2", CultureInfo.CurrentCulture) + "° F";
@@ -58,13 +61,15 @@ public class InfoPanel : MonoBehaviour
 
     public void AddItem(string name)
     {
-        itemList.Add($"{name}\n");
+        itemList.Add(name);
         hasChanged = true;
     }
 
     public void RemoveItem(string name)
     {
-        itemList.Remove($"{name}\n");
+        int i = itemList.IndexOf(name);
+        Debug.Log($"Removing {name} from index {i}");
+        itemList.RemoveAt(i);
         hasChanged = true;
     }
 }

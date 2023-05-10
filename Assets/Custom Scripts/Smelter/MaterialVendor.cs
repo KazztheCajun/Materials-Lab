@@ -27,6 +27,8 @@ public class MaterialVendor : MonoBehaviour
 
     public void Start()
     {
+        Transform preloadParent = GameObject.Find("PreloadParent").transform;
+
         fePreload = new List<GameObject>();
         niPreload = new List<GameObject>();
         crPreload = new List<GameObject>();
@@ -40,6 +42,7 @@ public class MaterialVendor : MonoBehaviour
         Vector3 loc = new Vector3(1000, 1000, 1000);
         for(int x = 0; x < 100; x++)
         {
+            // spawn preload objects
             GameObject feTemp = Instantiate(fePrefab, loc, Quaternion.identity);
             GameObject niTemp = Instantiate(niPrefab, loc, Quaternion.identity);
             GameObject crTemp = Instantiate(crPrefab, loc, Quaternion.identity);
@@ -49,7 +52,8 @@ public class MaterialVendor : MonoBehaviour
             GameObject siTemp = Instantiate(siPrefab, loc, Quaternion.identity);
             GameObject sTemp = Instantiate(sPrefab, loc, Quaternion.identity);
             GameObject moTemp = Instantiate(moPrefab, loc, Quaternion.identity);
-
+            
+            // set them as inactive
             feTemp.SetActive(false);
             niTemp.SetActive(false);
             crTemp.SetActive(false);
@@ -60,6 +64,18 @@ public class MaterialVendor : MonoBehaviour
             sTemp.SetActive(false);
             moTemp.SetActive(false);
 
+            // make them children of an empty to not clutter the Hierarchy
+            feTemp.transform.SetParent(preloadParent);
+            niTemp.transform.SetParent(preloadParent);
+            crTemp.transform.SetParent(preloadParent);
+            mnTemp.transform.SetParent(preloadParent);
+            cTemp.transform.SetParent(preloadParent);
+            pTemp.transform.SetParent(preloadParent);
+            siTemp.transform.SetParent(preloadParent);
+            sTemp.transform.SetParent(preloadParent);
+            moTemp.transform.SetParent(preloadParent);
+
+            // add them to the preload lists
             fePreload.Add(feTemp);
             niPreload.Add(niTemp);
             crPreload.Add(crTemp);
@@ -123,9 +139,9 @@ public class MaterialVendor : MonoBehaviour
         if(o != null)
         {
             o.transform.position = spawnPoint.position;
-            MeltableObject m = o.GetComponent<MeltableObject>();
-            m.Metal = MetalFactory.CreateNewMaterial(mat);
-            m.metalName = m.Metal.MetalName;
+            MeltableObject m = o.GetComponentInChildren<MeltableObject>();
+            m.metal = MetalFactory.CreateNewMaterial(mat);
+            //m.metalName = m.Metal.MetalName;
             o.SetActive(true);
         }
         else

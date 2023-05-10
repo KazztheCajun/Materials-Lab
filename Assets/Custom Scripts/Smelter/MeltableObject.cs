@@ -7,7 +7,7 @@ public class MeltableObject : MonoBehaviour, IEquatable<MeltableObject>
 {
 
     // the metal that this object is
-    public string metalName;
+    public Metal metal;
     public Material roomTemp;
     public Material redHot;
     public float temperature; // current temperature of the object | F
@@ -20,20 +20,15 @@ public class MeltableObject : MonoBehaviour, IEquatable<MeltableObject>
     [Range(0f, 1000f)]
     public float coolSpeed; // how fast the object cools down
     public bool isMelting;
-    public Metal Metal
-    {
-        get {return metal;} 
-        set {metal = value;} 
-    }
 
     private MeshRenderer render;
-    private Metal metal;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         isMelting = false;
-        this.metalName = "Nothing";
+        //this.metalName = "Nothing";
         this.render = this.GetComponent<MeshRenderer>();
         if(render == null)
         {
@@ -53,6 +48,8 @@ public class MeltableObject : MonoBehaviour, IEquatable<MeltableObject>
         {
             isMelting = false;
         }
+
+        UpdateColor();
     }
 
     private void UpdateColor()

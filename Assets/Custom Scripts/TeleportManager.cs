@@ -29,13 +29,13 @@ public class TeleportManager : MonoBehaviour
  
     void OnTeleportActivate(InputAction.CallbackContext context) 
     {
-        Debug.Log("Teleportation Active");
+        //Debug.Log("Teleportation Active");
         ray.enabled = true;
     }
 
     void OnTeleportCancel(InputAction.CallbackContext context)
     {
-        Debug.Log("Teleportation Canceled");
+        //Debug.Log("Teleportation Canceled");
         ray.enabled = false;
     }
 }

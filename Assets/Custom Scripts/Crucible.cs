@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Crucible : MonoBehaviour
 {
-    public List<MeltableObject> items;
+    public List<MeltableObject> materials;
+    public UnityEvent<string> materialAdded;
+    public UnityEvent<string> materialRemoved;
     public bool Pourable => pourable;
     public bool IsBeingHeated 
     {
@@ -23,7 +26,7 @@ public class Crucible : MonoBehaviour
     void Start()
     {
         this.pourable = false;
-        this.items = new List<MeltableObject>();
+        this.materials = new List<MeltableObject>();
         this.isBeingHeated = false;
         this.thermo = this.GetComponent<MeltableObject>();
         //this.contents = new List<GameObject>();
@@ -41,10 +44,10 @@ public class Crucible : MonoBehaviour
             CoolContents();
         }
 
-        if(items.Count > 0)
+        if(materials.Count > 0)
         {
             pourable = true; // assume it is pourable
-            foreach(MeltableObject o in items)
+            foreach(MeltableObject o in materials)
             {
                 if(!o.isMelting)
                 {
@@ -60,8 +63,10 @@ public class Crucible : MonoBehaviour
     {
         if(other.gameObject.tag == "meltable")
         {
-            Debug.Log($"Adding {other.gameObject} to the cruciable");
-            items.Add(other.gameObject.GetComponent<MeltableObject>()); // when an Item enters the trigger area, add it to the item list
+            MeltableObject o = other.gameObject.GetComponent<MeltableObject>();
+            Debug.Log($"Adding {o.metal.MetalName} to the cruciable");
+            materials.Add(o); // when an Item enters the trigger area, add it to the item list
+            materialAdded.Invoke(o.metal.MetalName);
         }
     }
 
@@ -69,8 +74,10 @@ public class Crucible : MonoBehaviour
     {
         if(other.gameObject.tag == "meltable")
         {
-            Debug.Log($"Removing {other.gameObject} from the cruciable");
-            items.Remove(other.gameObject.GetComponent<MeltableObject>()); // when the Item leaves the trigger, remove it from the item list
+            MeltableObject o = other.gameObject.GetComponent<MeltableObject>();
+            Debug.Log($"Removing {o.metal.MetalName} from the cruciable");
+            materials.Remove(o); // when the Item leaves the trigger, remove it from the item list
+            materialRemoved.Invoke(o.metal.MetalName);
         }
     }
 
@@ -78,9 +85,9 @@ public class Crucible : MonoBehaviour
     {
         this.thermo.HeatObject();
         // Heat up each meltable object inside the crucible
-        if(items.Count > 0) // if there are items in the list
+        if(materials.Count > 0) // if there are materials in the list
         {
-            foreach(MeltableObject o in items)
+            foreach(MeltableObject o in materials)
             {
                 o.HeatObject();
             }
@@ -91,9 +98,9 @@ public class Crucible : MonoBehaviour
     {
         // cool off each meltable object inside the crucible
         this.thermo.CoolObject();
-        if(items.Count > 0) // if there are items in the list
+        if(materials.Count > 0) // if there are materials in the list
         {
-            foreach(MeltableObject o in items)
+            foreach(MeltableObject o in materials)
             {
                 o.CoolObject();
             }

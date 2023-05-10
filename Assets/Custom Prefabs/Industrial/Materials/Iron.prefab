@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5424499209057827066}
-  - component: {fileID: 1290833418073464089}
   - component: {fileID: 8049633153898531128}
   - component: {fileID: -8263406715880714986}
   m_Layer: 0
   m_Name: Iron
-  m_TagString: meltable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,26 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1290833418073464089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5424499209057827065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 019f41377cf64284eb15f7b80237402c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomTemp: {fileID: 2100000, guid: 8188b921801bef04e88690efef673a1d, type: 2}
-  redHot: {fileID: 2100000, guid: 1e0cad800691bc74db5ff6c0de2910cc, type: 2}
-  temperature: 0
-  threshold: 900
-  maxTemp: 4000
-  heatSpeed: 150
-  coolSpeed: 10
-  isMelting: 0
 --- !u!54 &8049633153898531128
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -198,9 +177,10 @@ GameObject:
   - component: {fileID: 6327467310348539074}
   - component: {fileID: 6335199941554501486}
   - component: {fileID: 1416035761977969045}
+  - component: {fileID: 5923825311834677711}
   m_Layer: 0
-  m_Name: Rock
-  m_TagString: Untagged
+  m_Name: rock
+  m_TagString: meltable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,3 +264,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300006, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
+--- !u!114 &5923825311834677711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321115620785467028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019f41377cf64284eb15f7b80237402c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTemp: {fileID: 2100000, guid: 8188b921801bef04e88690efef673a1d, type: 2}
+  redHot: {fileID: 2100000, guid: 1e0cad800691bc74db5ff6c0de2910cc, type: 2}
+  temperature: 0
+  threshold: 900
+  maxTemp: 4000
+  heatSpeed: 150
+  coolSpeed: 10
+  isMelting: 0
