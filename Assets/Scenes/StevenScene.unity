@@ -5807,6 +5807,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hit_03
       objectReference: {fileID: 0}
+    - target: {fileID: 2955623459812423943, guid: f5507a8c6a22c404ab324980c4e8a11b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5507a8c6a22c404ab324980c4e8a11b, type: 3}
 --- !u!1 &119170514
@@ -7717,6 +7722,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hit_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7226583673155636402, guid: a2ab56839e1c9504ea9d141e95d0b16b,
         type: 3}
       propertyPath: m_RootOrder
@@ -9519,7 +9529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &474573198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16042,7 +16052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &608421868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16476,7 +16486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &651005259
 Transform:
   m_ObjectHideFlags: 0
@@ -16590,7 +16600,7 @@ GameObject:
   - component: {fileID: 686987977}
   - component: {fileID: 686987976}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: WorldSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17403,7 +17413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749135685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 24.8, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17476,6 +17486,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hit_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
@@ -17594,7 +17609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &763429973
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20988,7 +21003,7 @@ GameObject:
   - component: {fileID: 1057364736}
   - component: {fileID: 1057364735}
   m_Layer: 0
-  m_Name: Table (1)
+  m_Name: Ingot Pedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35032,6 +35047,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hit_04
       objectReference: {fileID: 0}
+    - target: {fileID: 8443315704496310910, guid: 6ef35fa36e3a65043b2d800600204bdd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef35fa36e3a65043b2d800600204bdd, type: 3}
 --- !u!1 &1470290042
@@ -41058,7 +41078,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: -0.11, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 1.7111161, y: 0.526, z: 0.48605502}
+  m_ConnectedAnchor: {x: 4.2831163, y: 0.526, z: 0.48605502}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 0, z: 0}
   m_XMotion: 0
@@ -48390,7 +48410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1808935578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48617,7 +48637,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: -0.52, z: 0}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -0.64, y: 1.288, z: -3.5057163}
   m_UseSpring: 1
   m_Spring:
     spring: 10
@@ -48800,7 +48820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1838747227
 Transform:
   m_ObjectHideFlags: 0
@@ -50221,7 +50241,7 @@ GameObject:
   - component: {fileID: 1926746791}
   - component: {fileID: 1926746790}
   m_Layer: 0
-  m_Name: Table (2)
+  m_Name: Ingot Pedestal 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51581,7 +51601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2010478475
 BoxCollider:
   m_ObjectHideFlags: 0

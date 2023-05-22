@@ -74,9 +74,7 @@ public class corroder : MonoBehaviour
                 // assign the target color
                 renderer.material.color = targetColor;
                 EndBaking();
-                // // start a new transition
-                // targetColor = new Color(Random.value, Random.value, Random.value);
-                // timeLeft = 1.0f;
+
             }
             else
             {
@@ -85,28 +83,7 @@ public class corroder : MonoBehaviour
                 renderer.material.color = Color.Lerp(renderer.material.color, targetColor, Time.deltaTime / timeLeft);
                 UpdateDisplayText();
 
-                // cylindertrans.Rotate(Vector3.up, Time.deltaTime * cylinderspeed);     //...rotate the object. Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-
                 
-                // float fracComplete = (Time.time - startTime) / BeginningBakeTime; // start time is when did the animation start, journey time is how long the whole thing should take
-
-                // Vector3.Slerp(cylindertrans.transform.localRotation.eulerAngles, GoalRotationalVector.x, fracComplete).x
-
-                // cylindertrans.localRotation = new Vector3( Vector3.Slerp(cylindertrans.transform.localRotation.eulerAngles, GoalRotationalVector.x, fracComplete).x, GoalRotationalVector.y, GoalRotationalVector.z);     //...rotate the object. Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
-                
-                // cylindertrans.localRotation = Quaternion.Euler(newVec.x, newVec.y, newVec.z);
-                // cylindertrans.localRotation = Quaternion.Slerp(cylindertrans.transform.localRotation, GoalRotationalVector, Time.time * rotSpeed);
-
-
-                float rotationSpeed = yearsToSimulate * 360f * 4f;
-                
-                cylindertrans.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-
-                // if(rotateWorldAsWell){
-                    // worldSphere.Rotate(Vector3.right, rotationSpeed * Time.deltaTime);
-                // }
-
-                // update the timer
                 timeLeft -= Time.deltaTime;
                 fromZeroTimer += Time.deltaTime;
             }
@@ -135,10 +112,6 @@ public class corroder : MonoBehaviour
 
 
         CalculateHowThisIngotWillChange(thingInOven);
-        // OvenDoor.position = CloseOvenDoorPosition.position;
-        // Baking = true;
-        // timeLeft = yearsToSimulate * realLifeSecondsToSimulatedYears;
-        // shakeTime = yearsToSimulate * realLifeSecondsToSimulatedYears;
 
         float rawNum = Mathf.Pow(yearsToSimulate, 2f) + 2f;
 
@@ -154,21 +127,10 @@ public class corroder : MonoBehaviour
 
         Sequence s = DOTween.Sequence();
         s.Append(OvenDoor.DOMove(CloseOvenDoorPosition.position, 1.5f).SetEase(Ease.OutQuad));
-        // s.Append(AttackText.gameObject.transform.DOScaleX(0.003f,0.2f));//m.transform.DOMove(DiscardDeckTransform.position, 0.3f));
-        // s.Insert(0f, AttackText.gameObject.transform.DOScaleY(0.002f,0.2f));
-		
-        //s.Insert(0f, CardVisual.transform.DORotate(Vector3.zero, 1f));
-        //s.AppendInterval(2f);
+        
         s.OnComplete(()=>
             {
-				// AttackText.gameObject.transform.DOScaleX(0.001f,1f);
-				// AttackText.gameObject.transform.DOScaleY(0.001f,1f);
-
-				// //PutCardIntoDiscardPile(m);
-                // //Destroy(m);
-				// //Command.CommandExecutionComplete();
-                // if(UsingSprinklers)
-                //     ActivateSprinklers();
+				
 
                 if(UsingFillTub){
                     ActivateSprinklers();
@@ -183,11 +145,8 @@ public class corroder : MonoBehaviour
                         
                         Baking = true;
                         Sequence shakeCorroder = DOTween.Sequence();
-                        // shakeCorroder.Append( this.transform.DOShakePosition(shakeTime,0.1f,8,30f, false, false) );
                         shakeCorroder.Insert( 0f, worldSphere.DORotate(new Vector3( (yearsToSimulate * 360f ) * speedRotationMultiplier, 0f, 0f ), shakeTime, RotateMode.FastBeyond360).SetEase(Ease.OutQuad) );
-                        // Quaternion rotation = Quaternion.Euler(new Vector3( ( (yearsToSimulate * 360f ) * 36f),  0f, 0f ));
-                        // shakeCorroder.Insert( 0f, cylindertrans.DORotateQuaternion(rotation, shakeTime).SetEase(Ease.OutQuad) );
-                        // shakeCorroder.Insert(0f, this.transform.DOShakeRotation(shakeTime,10f,8,30f, false) );
+                        
                         
                         
                         shakeCorroder.OnComplete(()=>{
@@ -197,14 +156,6 @@ public class corroder : MonoBehaviour
                             drainWater.Append(tubFiller.transform.DOLocalMoveY(0f, 3f).SetEase(Ease.OutQuad));
                             drainWater.Insert(0f, tubFiller.transform.DOScaleY(0f, 3f).SetEase(Ease.OutQuad));
                             drainWater.Append(OvenDoor.DOMove(OpenOvenDoorPosition.position, 1.5f).SetEase(Ease.OutQuad));
-
-                            // drainWater.OnComplete(()=>{
-                            
-                            //     Sequence openDoor = DOTween.Sequence();
-                            //     openDoor.Append(OvenDoor.DOMove(OpenOvenDoorPosition.position, 1.5f).SetEase(Ease.OutQuad));
-
-
-                            // });
 
                         });
                     }); 
@@ -230,21 +181,17 @@ public class corroder : MonoBehaviour
     [ContextMenu("EndBaking")]
     void EndBaking(){
         Baking = false;
-        // OvenDoor.position = OpenOvenDoorPosition.position;
         thingInOven.corroded = true;
-        // text.text = "Simulated Days of Corrosion: " + (yearsToSimulate * realLifeSecondsToSimulatedYears) + " \n Weight lost: " + weightLost + " kg.\n Volume lost: " + volumeLost + " m^3";
         thingInOven.transform.localScale = newDimensions;
         psystem.Stop();
 
     }
 
     public void SomethingCorrodableIsNowInTheCorroder(GameObject m){
-        // if(m.GetComponent<Corrodable>().corroded){
-        //     return;
-        // }
+        
         thingInOven = m.GetComponent<Corrodable>();
         renderer = m.GetComponent<Renderer>();
-        // StartBaking();
+
     }
 
 
@@ -312,7 +259,6 @@ public class corroder : MonoBehaviour
 
         // this will be where the fillers are adjusted
         // filler val should be the metal normalized val of what, 
-
         float fillVal = (( (thingInOven.rustRate * yearsToSimulate) * 1000)*(fromZeroTimer/shakeTime)) / ( (thingInOven.rustRate * yearsToSimulate) * 1000f );
         dgraph.SetFillerVal(thingInOven.materialDisplayName, fillVal, yearsToSimulate);
 
