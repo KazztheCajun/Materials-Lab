@@ -65,30 +65,31 @@ public class corroder : MonoBehaviour
     
     // end calc variables
     
-    void Update()
-    {
-        if(Baking){
-            if (timeLeft <= Time.deltaTime)
-            {
-                // transition complete
-                // assign the target color
-                renderer.material.color = targetColor;
-                EndBaking();
 
-            }
-            else
-            {
-                // transition in progress
-                // calculate interpolated color
-                renderer.material.color = Color.Lerp(renderer.material.color, targetColor, Time.deltaTime / timeLeft);
-                UpdateDisplayText();
+    public void SomethingCorrodableIsNowInTheCorroder(GameObject m){
+        
+        thingInOven = m.GetComponent<Corrodable>();
+        renderer = m.GetComponent<Renderer>();
 
-                
-                timeLeft -= Time.deltaTime;
-                fromZeroTimer += Time.deltaTime;
-            }
+    }
+
+
+    public void SomethingCorrodableHasNowLeftTheOven(GameObject m){
+        thingInOven = null;
+    }
+
+
+    void ActivateSprinklers(){
+        foreach( GameObject m in sprinklers ){ 
+            m.SetActive(true);
         }
     }
+    void DeactivateSprinklers(){
+        foreach( GameObject m in sprinklers ){ 
+            m.SetActive(false);
+        }
+    }
+
 
     [ContextMenu("StartBaking")]
     public void StartBaking(){
@@ -96,7 +97,7 @@ public class corroder : MonoBehaviour
             return;
         ResetCalculationVariables();
 
-        // get ingot child, disconnect it from its parent, then reconnect it later
+        // FOR GHOST FIELD: get ingot child, disconnect it from its parent, then reconnect it later
         
         Transform maskingChild = thingInOven.childMaskableIngot;
         maskingChild.parent = null;
@@ -104,21 +105,12 @@ public class corroder : MonoBehaviour
 
 
 
-
-
-
-
-
-
+        // change actual size of ingot
 
         CalculateHowThisIngotWillChange(thingInOven);
-
         float rawNum = Mathf.Pow(yearsToSimulate, 2f) + 2f;
-
         timeLeft = Mathf.Clamp( rawNum, 7f, MaxTimeSpentRotating );
         shakeTime = timeLeft;
-
-
         startTime = Time.time;
         BeginningBakeTime = timeLeft;
         // GoalRotationalVector = new Vector3( (10)*yearsToSimulate , 90, 90  ); // same y and z, x = (360 * 365)(one year of rotation) * yearsToSimulate()
@@ -167,14 +159,28 @@ public class corroder : MonoBehaviour
 	
     }
 
-    void ActivateSprinklers(){
-        foreach( GameObject m in sprinklers ){ 
-            m.SetActive(true);
-        }
-    }
-    void DeactivateSprinklers(){
-        foreach( GameObject m in sprinklers ){ 
-            m.SetActive(false);
+    void Update()
+    {
+        if(Baking){
+            if (timeLeft <= Time.deltaTime)
+            {
+                // transition complete
+                // assign the target color
+                renderer.material.color = targetColor;
+                EndBaking();
+
+            }
+            else
+            {
+                // transition in progress
+                // calculate interpolated color
+                renderer.material.color = Color.Lerp(renderer.material.color, targetColor, Time.deltaTime / timeLeft);
+                UpdateDisplayText();
+
+                
+                timeLeft -= Time.deltaTime;
+                fromZeroTimer += Time.deltaTime;
+            }
         }
     }
 
@@ -187,17 +193,6 @@ public class corroder : MonoBehaviour
 
     }
 
-    public void SomethingCorrodableIsNowInTheCorroder(GameObject m){
-        
-        thingInOven = m.GetComponent<Corrodable>();
-        renderer = m.GetComponent<Renderer>();
-
-    }
-
-
-    public void SomethingCorrodableHasNowLeftTheOven(GameObject m){
-        thingInOven = null;
-    }
 
 
 
