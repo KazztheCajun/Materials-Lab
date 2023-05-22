@@ -23,7 +23,7 @@ public class Lever : MonoBehaviour
             InTargetPos = false;
         }
 
-        print(hinge.angle);
+        // print(hinge.angle);
     }
 
 
